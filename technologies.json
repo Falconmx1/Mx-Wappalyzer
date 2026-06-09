@@ -1,0 +1,143 @@
+{
+  "tecnologias": [
+    {
+      "nombre": "WordPress",
+      "categoria": "CMS",
+      "patrones": ["/wp-content/", "/wp-includes/", "wordpress", "wp-json"],
+      "cookies": ["wordpress_logged_in", "wp-settings"],
+      "meta": {"generator": "wordpress"}
+    },
+    {
+      "nombre": "Drupal",
+      "categoria": "CMS",
+      "patrones": ["drupal", "sites/all", "drupal.js"],
+      "headers": {"X-Drupal-Cache": ".*"},
+      "meta": {"generator": "drupal"}
+    },
+    {
+      "nombre": "Joomla",
+      "categoria": "CMS",
+      "patrones": ["/media/system/js/", "joomla", "com_content"],
+      "meta": {"generator": "joomla"}
+    },
+    {
+      "nombre": "Magento",
+      "categoria": "E-commerce",
+      "patrones": ["magento", "skin/frontend", "Mage.Cookies"],
+      "cookies": ["mage-cache-storage"]
+    },
+    {
+      "nombre": "PrestaShop",
+      "categoria": "E-commerce",
+      "patrones": ["prestashop", "/js/jquery/", "ps_"],
+      "meta": {"generator": "prestashop"}
+    },
+    {
+      "nombre": "Laravel",
+      "categoria": "Framework PHP",
+      "patrones": ["laravel", "csrf-token", "_token"],
+      "headers": {"X-Powered-By": "laravel"}
+    },
+    {
+      "nombre": "Django",
+      "categoria": "Framework Python",
+      "patrones": ["django", "csrfmiddlewaretoken", "dj"],
+      "headers": {"X-Frame-Options": "deny"}
+    },
+    {
+      "nombre": "Ruby on Rails",
+      "categoria": "Framework Ruby",
+      "patrones": ["rails", "csrf-param", "authenticity_token"],
+      "headers": {"X-Powered-By": "Phusion Passenger"}
+    },
+    {
+      "nombre": "React",
+      "categoria": "JavaScript Library",
+      "patrones": ["react", "reactjs", "react-root", "_reactRootContainer"]
+    },
+    {
+      "nombre": "Vue.js",
+      "categoria": "JavaScript Library",
+      "patrones": ["vue", "v-", "data-v-", "vuejs"]
+    },
+    {
+      "nombre": "Angular",
+      "categoria": "JavaScript Framework",
+      "patrones": ["ng-", "angular", "_ng", "ng-app"]
+    },
+    {
+      "nombre": "jQuery",
+      "categoria": "JavaScript Library",
+      "patrones": ["jquery", "jquery-", "$\\\\.", "jQuery"]
+    },
+    {
+      "nombre": "Bootstrap",
+      "categoria": "CSS Framework",
+      "patrones": ["bootstrap", "col-md-", "container-fluid", "btn-primary"]
+    },
+    {
+      "nombre": "Apache",
+      "categoria": "Web Server",
+      "patrones": ["apache"],
+      "headers": {"Server": "apache"}
+    },
+    {
+      "nombre": "Nginx",
+      "categoria": "Web Server",
+      "patrones": ["nginx"],
+      "headers": {"Server": "nginx"}
+    },
+    {
+      "nombre": "IIS",
+      "categoria": "Web Server",
+      "patrones": ["iis"],
+      "headers": {"Server": "Microsoft-IIS"}
+    },
+    {
+      "nombre": "CloudFlare",
+      "categoria": "CDN/Security",
+      "patrones": ["cloudflare"],
+      "headers": {"CF-RAY": ".*", "CF-Cache-Status": ".*"}
+    },
+    {
+      "nombre": "Google Analytics",
+      "categoria": "Analytics",
+      "patrones": ["google-analytics", "ga\\(", "gtag\\(", "UA-"]
+    },
+    {
+      "nombre": "Facebook Pixel",
+      "categoria": "Analytics",
+      "patrones": ["facebook.com/tr", "fbq\\(", "fbq\\\\('init'"]
+    },
+    {
+      "nombre": "Font Awesome",
+      "categoria": "Icon Library",
+      "patrones": ["font-awesome", "fa-", "fontawesome"]
+    },
+    {
+      "nombre": "Google Fonts",
+      "categoria": "Fonts",
+      "patrones": ["fonts.googleapis.com", "googleapis.com/css"]
+    },
+    {
+      "nombre": "Stripe",
+      "categoria": "Payment",
+      "patrones": ["stripe", "stripe.com", "StripeObject"]
+    },
+    {
+      "nombre": "PayPal",
+      "categoria": "Payment",
+      "patrones": ["paypal", "paypal.com", "paypalobjects"]
+    },
+    {
+      "nombre": "phpMyAdmin",
+      "categoria": "Database Tool",
+      "patrones": ["phpmyadmin", "pma_", "navigation.php"]
+    },
+    {
+      "nombre": "cPanel",
+      "categoria": "Hosting Control",
+      "patrones": ["cpanel", "cgi-sys", "cpanel-logo"]
+    }
+  ]
+}
