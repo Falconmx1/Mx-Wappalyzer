@@ -102,3 +102,24 @@ python mx_wappalyzer.py -u https://www.gob.mx
 
 # Escaneo rápido con timeout de 5 segundos
 python mx_wappalyzer.py -u https://google.com -t 5
+
+🎮 4. Nuevos comand# Modo sigiloso (evita bloqueos)
+python3 mx_wappalyzer.py -u https://github.com -s
+
+# Exportar resultados a JSON
+python3 mx_wappalyzer.py -u https://python.org -o json
+
+# Exportar a TXT legible
+python3 mx_wappalyzer.py -u https://python.org -o txt
+
+# Exportar a CSV (para Excel)
+python3 mx_wappalyzer.py -u https://python.org -o csv
+
+# Modo sigiloso + exportación
+python3 mx_wappalyzer.py -u https://example.com -s -o json
+
+# Escaneo masivo con exportación
+python3 mx_wappalyzer.py -l urls.txt -s -o json
+
+# Ayuda completa
+python3 mx_wappalyzer.py -hos de uso
