@@ -3,141 +3,445 @@
     {
       "nombre": "WordPress",
       "categoria": "CMS",
-      "patrones": ["/wp-content/", "/wp-includes/", "wordpress", "wp-json"],
-      "cookies": ["wordpress_logged_in", "wp-settings"],
+      "patrones": ["/wp-content/", "/wp-includes/", "wordpress", "wp-json", "wp-admin", "wp-login"],
+      "cookies": ["wordpress_logged_in", "wp-settings", "wordpress_test_cookie"],
+      "headers": {"X-Pingback": ".*"},
       "meta": {"generator": "wordpress"}
     },
     {
       "nombre": "Drupal",
       "categoria": "CMS",
-      "patrones": ["drupal", "sites/all", "drupal.js"],
-      "headers": {"X-Drupal-Cache": ".*"},
-      "meta": {"generator": "drupal"}
+      "patrones": ["drupal", "sites/all", "drupal.js", "drupal.org", "drupal_get_path", "Drupal.settings"],
+      "headers": {"X-Drupal-Cache": ".*", "X-Drupal-Dynamic-Cache": ".*"},
+      "meta": {"generator": "drupal"},
+      "cookies": ["Drupal.visitor", "SESS"]
     },
     {
       "nombre": "Joomla",
       "categoria": "CMS",
-      "patrones": ["/media/system/js/", "joomla", "com_content"],
-      "meta": {"generator": "joomla"}
+      "patrones": ["/media/system/js/", "joomla", "com_content", "com_users", "index.php?option=com_", "/templates/"],
+      "meta": {"generator": "joomla"},
+      "cookies": ["joomla_user_state"]
     },
     {
       "nombre": "Magento",
       "categoria": "E-commerce",
-      "patrones": ["magento", "skin/frontend", "Mage.Cookies"],
-      "cookies": ["mage-cache-storage"]
+      "patrones": ["magento", "skin/frontend", "Mage.Cookies", "mage/", "checkout/cart", "catalog/product"],
+      "cookies": ["mage-cache-storage", "mage-cache-sessid", "mage-messages"],
+      "headers": {"X-Magento-Tags": ".*"}
     },
     {
       "nombre": "PrestaShop",
       "categoria": "E-commerce",
-      "patrones": ["prestashop", "/js/jquery/", "ps_"],
-      "meta": {"generator": "prestashop"}
+      "patrones": ["prestashop", "/js/jquery/", "ps_", "prestashop.com", "controller=product", "order.php"],
+      "meta": {"generator": "prestashop"},
+      "cookies": ["PrestaShop-"]
+    },
+    {
+      "nombre": "Shopify",
+      "categoria": "E-commerce",
+      "patrones": ["shopify", "myshopify.com", "/cdn/shop/", "Shopify.theme", "Shopify.Checkout"],
+      "headers": {"X-ShopId": ".*", "X-Shopify-Stage": ".*"},
+      "cookies": ["_shopify_", "cart_currency", "secure_customer_sig"]
+    },
+    {
+      "nombre": "WooCommerce",
+      "categoria": "E-commerce",
+      "patrones": ["woocommerce", "/wp-content/plugins/woocommerce", "wc-", "woo_", "add_to_cart", "product-page"],
+      "cookies": ["woocommerce_cart_hash", "woocommerce_items_in_cart", "wp_woocommerce_session"]
     },
     {
       "nombre": "Laravel",
       "categoria": "Framework PHP",
-      "patrones": ["laravel", "csrf-token", "_token"],
-      "headers": {"X-Powered-By": "laravel"}
+      "patrones": ["laravel", "csrf-token", "_token", "laravel_session", "livewire", "Laravel.vue"],
+      "headers": {"X-Powered-By": "laravel", "X-Laravel-Version": ".*"},
+      "cookies": ["laravel_session"]
     },
     {
       "nombre": "Django",
       "categoria": "Framework Python",
-      "patrones": ["django", "csrfmiddlewaretoken", "dj"],
-      "headers": {"X-Frame-Options": "deny"}
+      "patrones": ["django", "csrfmiddlewaretoken", "dj", "django.contrib", "django.core", "__admin_media_prefix__"],
+      "headers": {"X-Frame-Options": "deny", "X-CSRFToken": ".*"},
+      "cookies": ["csrftoken", "sessionid"]
     },
     {
       "nombre": "Ruby on Rails",
       "categoria": "Framework Ruby",
-      "patrones": ["rails", "csrf-param", "authenticity_token"],
-      "headers": {"X-Powered-By": "Phusion Passenger"}
+      "patrones": ["rails", "csrf-param", "authenticity_token", "data-remote", "turbolinks", "ruby on rails"],
+      "headers": {"X-Powered-By": "Phusion Passenger", "X-Runtime": ".*"},
+      "cookies": ["_rails", "_session"]
+    },
+    {
+      "nombre": "Flask",
+      "categoria": "Framework Python",
+      "patrones": ["flask", "flask-session", "/static/flask", "jinja", "flask.g"],
+      "headers": {"X-Powered-By": "Flask"}
+    },
+    {
+      "nombre": "Express.js",
+      "categoria": "Framework Node.js",
+      "patrones": ["express", "expressjs", "x-powered-by.*express", "connect.sid"],
+      "headers": {"X-Powered-By": "Express"},
+      "cookies": ["connect.sid"]
+    },
+    {
+      "nombre": "Spring Boot",
+      "categoria": "Framework Java",
+      "patrones": ["spring", "spring-boot", "actuator", "/webjars/", "x-application-context"],
+      "headers": {"X-Application-Context": ".*"}
+    },
+    {
+      "nombre": "Next.js",
+      "categoria": "Framework React",
+      "patrones": ["next.js", "nextjs", "_next/static", "__NEXT_DATA__", "next/dist"],
+      "headers": {"X-Nextjs-Cache": ".*", "X-Nextjs-Page": ".*"}
+    },
+    {
+      "nombre": "Nuxt.js",
+      "categoria": "Framework Vue",
+      "patrones": ["nuxt", "nuxt.js", "_nuxt/", "nuxt-layout", "nuxt-link"],
+      "headers": {"X-Nuxtjs- Version": ".*"}
     },
     {
       "nombre": "React",
       "categoria": "JavaScript Library",
-      "patrones": ["react", "reactjs", "react-root", "_reactRootContainer"]
+      "patrones": ["react", "reactjs", "react-root", "_reactRootContainer", "ReactDOM", "react.production.min", "create-react-app"],
+      "headers": {"X-React-Version": ".*"}
     },
     {
       "nombre": "Vue.js",
       "categoria": "JavaScript Library",
-      "patrones": ["vue", "v-", "data-v-", "vuejs"]
+      "patrones": ["vue", "v-", "data-v-", "vuejs", "vue-router", "vuex", "vue.min", "vue.js"],
+      "headers": {"X-Vue-Version": ".*"}
     },
     {
       "nombre": "Angular",
       "categoria": "JavaScript Framework",
-      "patrones": ["ng-", "angular", "_ng", "ng-app"]
+      "patrones": ["ng-", "angular", "_ng", "ng-app", "angularjs", "ng-view", "ui-view", "angular.min"],
+      "headers": {"X-Angular-Version": ".*"}
     },
     {
       "nombre": "jQuery",
       "categoria": "JavaScript Library",
-      "patrones": ["jquery", "jquery-", "$\\\\.", "jQuery"]
+      "patrones": ["jquery", "jquery-", "$\\\\.", "jQuery", "jquery.min", "jquery-ui", "$.ajax"],
+      "meta": {"generator": "jquery"}
     },
     {
       "nombre": "Bootstrap",
       "categoria": "CSS Framework",
-      "patrones": ["bootstrap", "col-md-", "container-fluid", "btn-primary"]
+      "patrones": ["bootstrap", "col-md-", "container-fluid", "btn-primary", "navbar", "bootstrap.min.css", "bootstrap.bundle"],
+      "headers": {"X-Bootstrap-Version": ".*"}
+    },
+    {
+      "nombre": "Tailwind CSS",
+      "categoria": "CSS Framework",
+      "patrones": ["tailwind", "tw-", "class=\\\"tw-", "tailwindcss", "tailwind.min.css"],
+      "headers": {"X-Tailwind-Version": ".*"}
+    },
+    {
+      "nombre": "Foundation",
+      "categoria": "CSS Framework",
+      "patrones": ["foundation", "foundation.min.css", "data-interchange", "data-equalizer", "reveal"],
+      "headers": {"X-Foundation-Version": ".*"}
     },
     {
       "nombre": "Apache",
       "categoria": "Web Server",
-      "patrones": ["apache"],
-      "headers": {"Server": "apache"}
+      "patrones": ["apache", "apache/", "apache tomcat"],
+      "headers": {"Server": "apache", "X-Powered-By": "Apache"}
     },
     {
       "nombre": "Nginx",
       "categoria": "Web Server",
-      "patrones": ["nginx"],
-      "headers": {"Server": "nginx"}
+      "patrones": ["nginx", "nginx/", "nginx.org"],
+      "headers": {"Server": "nginx", "X-Powered-By": "nginx"}
     },
     {
       "nombre": "IIS",
       "categoria": "Web Server",
-      "patrones": ["iis"],
-      "headers": {"Server": "Microsoft-IIS"}
+      "patrones": ["iis", "windows server", "asp.net"],
+      "headers": {"Server": "Microsoft-IIS", "X-AspNet-Version": ".*", "X-Powered-By": "ASP.NET"}
     },
     {
       "nombre": "CloudFlare",
       "categoria": "CDN/Security",
-      "patrones": ["cloudflare"],
-      "headers": {"CF-RAY": ".*", "CF-Cache-Status": ".*"}
+      "patrones": ["cloudflare", "cloudflare.com", "__cf", "cf-ray", "cf-cache-status"],
+      "headers": {"CF-RAY": ".*", "CF-Cache-Status": ".*", "CF-Polish": ".*"},
+      "cookies": ["__cfduid", "__cflb"]
     },
     {
       "nombre": "Google Analytics",
       "categoria": "Analytics",
-      "patrones": ["google-analytics", "ga\\(", "gtag\\(", "UA-"]
+      "patrones": ["google-analytics", "ga\\(", "gtag\\(", "UA-", "G-", "analytics.js", "gtag/js"],
+      "cookies": ["_ga", "_gat", "_gid", "__utma", "__utmb", "__utmc", "__utmz"]
     },
     {
       "nombre": "Facebook Pixel",
       "categoria": "Analytics",
-      "patrones": ["facebook.com/tr", "fbq\\(", "fbq\\\\('init'"]
+      "patrones": ["facebook.com/tr", "fbq\\(", "fbq\\\\('init'", "facebook/pixel", "fbq('track')"],
+      "cookies": ["_fbp", "fr", "datr"]
+    },
+    {
+      "nombre": "Hotjar",
+      "categoria": "Analytics",
+      "patrones": ["hotjar", "hotjar.com", "hj-", "hjsv", "_hj"],
+      "cookies": ["_hj", "hjIncludedInSample"]
     },
     {
       "nombre": "Font Awesome",
       "categoria": "Icon Library",
-      "patrones": ["font-awesome", "fa-", "fontawesome"]
+      "patrones": ["font-awesome", "fa-", "fontawesome", "fontawesome.com", "fa-brands", "fa-solid"],
+      "headers": {"X-FontAwesome-Version": ".*"}
     },
     {
       "nombre": "Google Fonts",
       "categoria": "Fonts",
-      "patrones": ["fonts.googleapis.com", "googleapis.com/css"]
+      "patrones": ["fonts.googleapis.com", "googleapis.com/css", "fonts.gstatic.com", "google font"],
+      "headers": {"X-Google-Fonts": ".*"}
     },
     {
       "nombre": "Stripe",
       "categoria": "Payment",
-      "patrones": ["stripe", "stripe.com", "StripeObject"]
+      "patrones": ["stripe", "stripe.com", "StripeObject", "stripe.js", "StripeCheckout", "pk_live", "pk_test"],
+      "cookies": ["__stripe_mid", "__stripe_sid"]
     },
     {
       "nombre": "PayPal",
       "categoria": "Payment",
-      "patrones": ["paypal", "paypal.com", "paypalobjects"]
+      "patrones": ["paypal", "paypal.com", "paypalobjects", "paypal-button", "paypal-checkout", "www.paypal.com/cgi-bin/webscr"],
+      "headers": {"X-PayPal-Version": ".*"}
     },
     {
       "nombre": "phpMyAdmin",
       "categoria": "Database Tool",
-      "patrones": ["phpmyadmin", "pma_", "navigation.php"]
+      "patrones": ["phpmyadmin", "pma_", "navigation.php", "db_structure.php", "phpmyadmin.css", "pma.css"],
+      "headers": {"X-PhpMyAdmin": ".*"},
+      "cookies": ["phpMyAdmin", "pma_lang"]
     },
     {
       "nombre": "cPanel",
       "categoria": "Hosting Control",
-      "patrones": ["cpanel", "cgi-sys", "cpanel-logo"]
+      "patrones": ["cpanel", "cgi-sys", "cpanel-logo", "cpanel.css", "cpanel.net", "cpanel_hosting"],
+      "headers": {"X-Cpanel": ".*"}
+    },
+    {
+      "nombre": "Plesk",
+      "categoria": "Hosting Control",
+      "patrones": ["plesk", "plesk-logo", "plesk.css", "plesk-stat", "plesk.com"],
+      "headers": {"X-Plesk": ".*"}
+    },
+    {
+      "nombre": "phpBB",
+      "categoria": "Forum",
+      "patrones": ["phpbb", "phpbb.com", "viewtopic.php", "viewforum.php", "memberlist.php", "ucp.php"],
+      "headers": {"X-PHPBB": ".*"},
+      "cookies": ["phpbb3_"]
+    },
+    {
+      "nombre": "vBulletin",
+      "categoria": "Forum",
+      "patrones": ["vbulletin", "vbulletin.css", "vb_bulletin", "vbulletin.com", "forumdisplay.php", "showthread.php"],
+      "cookies": ["vbulletin", "bb_sessionhash"]
+    },
+    {
+      "nombre": "SMF",
+      "categoria": "Forum",
+      "patrones": ["simple machines forum", "smf", "index.php?action=", "smf_", "smflogo"],
+      "cookies": ["SMFCookie"]
+    },
+    {
+      "nombre": "MediaWiki",
+      "categoria": "Wiki",
+      "patrones": ["mediawiki", "mediawiki.org", "index.php?title=", "mw-config", "load.php", "wiki.phtml"],
+      "headers": {"X-MediaWiki": ".*"}
+    },
+    {
+      "nombre": "DokuWiki",
+      "categoria": "Wiki",
+      "patrones": ["dokuwiki", "doku.php", "lib/exe/", "dokuwiki.css", "dokuwiki.org"],
+      "headers": {"X-DokuWiki": ".*"}
+    },
+    {
+      "nombre": "Confluence",
+      "categoria": "Wiki",
+      "patrones": ["confluence", "confluence.css", "confcloud", "atlassian.com", "spaces/flyingpdf/pdfpageexport"],
+      "headers": {"X-Confluence": ".*"}
+    },
+    {
+      "nombre": "Adobe Commerce",
+      "categoria": "E-commerce",
+      "patrones": ["adobe commerce", "magento", "adobe.com/magento", "requirejs", "magento/module"],
+      "headers": {"X-Adobe-Commerce": ".*"}
+    },
+    {
+      "nombre": "BigCommerce",
+      "categoria": "E-commerce",
+      "patrones": ["bigcommerce", "mybigcommerce.com", "data-category", "bc-sf-filter", "cdn11.bigcommerce.com"],
+      "headers": {"X-BigCommerce": ".*"}
+    },
+    {
+      "nombre": "OpenCart",
+      "categoria": "E-commerce",
+      "patrones": ["opencart", "route=checkout", "route=product", "catalog/view/theme", "opencart.com"],
+      "cookies": ["OCSESSID"]
+    },
+    {
+      "nombre": "Backdrop CMS",
+      "categoria": "CMS",
+      "patrones": ["backdrop", "backdropcms", "files/backdrop", "backdrop/settings"],
+      "headers": {"X-Backdrop-Cache": ".*"}
+    },
+    {
+      "nombre": "Ghost",
+      "categoria": "CMS",
+      "patrones": ["ghost", "ghost.org", "ghost/", "ghost-head", "ghost_foot"],
+      "headers": {"X-Ghost-Version": ".*"}
+    },
+    {
+      "nombre": "Webflow",
+      "categoria": "CMS",
+      "patrones": ["webflow", "webflow.com", "webflow.js", "data-wf", "wf-"],
+      "headers": {"X-Webflow-Version": ".*"}
+    },
+    {
+      "nombre": "Wix",
+      "categoria": "CMS",
+      "patrones": ["wix", "wix.com", "wix-static", "wix-code", "wixapps", "wix-animation"],
+      "headers": {"X-Wix-Published-Version": ".*"},
+      "cookies": ["X-Wix"]
+    },
+    {
+      "nombre": "Squarespace",
+      "categoria": "CMS",
+      "patrones": ["squarespace", "squarespace.com", "static.squarespace", "collection-root", "squarespace:collection"],
+      "headers": {"X-Squarespace-Version": ".*"}
+    },
+    {
+      "nombre": "HubSpot CMS",
+      "categoria": "CMS",
+      "patrones": ["hubspot", "hubspot.com", "hs-analytics", "hubspotcms", "hubspot_cms"],
+      "cookies": ["hubspotutk", "__hssc", "__hstc", "__hssrc", "hs"]
+    },
+    {
+      "nombre": "Elasticsearch",
+      "categoria": "Search Engine",
+      "patrones": ["elasticsearch", "elastic.co", "_search", "elasticsearch.js", "elasticsearch-head"],
+      "headers": {"X-Elasticsearch-Version": ".*"}
+    },
+    {
+      "nombre": "Algolia",
+      "categoria": "Search Engine",
+      "patrones": ["algolia", "algolia.net", "algoliasearch", "docsearch", "algolia-search"],
+      "headers": {"X-Algolia-API-Key": ".*", "X-Algolia-Application-Id": ".*"}
+    },
+    {
+      "nombre": "Redis",
+      "categoria": "Database",
+      "patrones": ["redis", "redis.io", "redis-session", "redis-cluster", "redis-cache"],
+      "headers": {"X-Redis-Cache": ".*", "X-Redis-Instance": ".*"}
+    },
+    {
+      "nombre": "Memcached",
+      "categoria": "Cache System",
+      "patrones": ["memcached", "memcache", "memcached-port", "memcache-session"],
+      "headers": {"X-Memcached": ".*"}
+    },
+    {
+      "nombre": "Varnish",
+      "categoria": "Cache System",
+      "patrones": ["varnish", "varnish-cache", "x-varnish", "varnishlog", "varnishadm"],
+      "headers": {"X-Varnish": ".*", "X-Cache": ".*varnish.*", "Via": ".*varnish.*"}
+    },
+    {
+      "nombre": "Sentry",
+      "categoria": "Error Tracking",
+      "patrones": ["sentry", "sentry.io", "sentry-key", "raven.js", "sentry-cdn"],
+      "headers": {"X-Sentry-Error": ".*"}
+    },
+    {
+      "nombre": "New Relic",
+      "categoria": "Monitoring",
+      "patrones": ["new relic", "newrelic", "nr-agent", "newrelic.com", "bam.nr-data.net"],
+      "headers": {"X-NewRelic-App": ".*", "X-NewRelic-ID": ".*"}
+    },
+    {
+      "nombre": "Matomo",
+      "categoria": "Analytics",
+      "patrones": ["matomo", "piwik", "matomo.js", "piwik.js", "matomo.org", "piwik.org"],
+      "cookies": ["_pk_"]
+    },
+    {
+      "nombre": "Yandex Metrica",
+      "categoria": "Analytics",
+      "patrones": ["yandex", "metrica", "yandex.ru", "yandexmetrica", "mc.yandex"],
+      "cookies": ["_ym_", "yandexuid", "metrika_enabled"]
+    },
+    {
+      "nombre": "Segment",
+      "categoria": "Analytics",
+      "patrones": ["segment", "segment.io", "analytics.js", "segment.com", "ajs_"],
+      "cookies": ["ajs_anonymous_id", "ajs_group_id", "ajs_user_id"]
+    },
+    {
+      "nombre": "Amplitude",
+      "categoria": "Analytics",
+      "patrones": ["amplitude", "amplitude.com", "amplitude.js", "amplitude-sdk"],
+      "cookies": ["amplitude_id"]
+    },
+    {
+      "nombre": "Mixpanel",
+      "categoria": "Analytics",
+      "patrones": ["mixpanel", "mixpanel.com", "mixpanel.js", "mp_", "mixpanel.track"],
+      "cookies": ["mp_", "mixpanel-"]
+    },
+    {
+      "nombre": "Chart.js",
+      "categoria": "JavaScript Charts",
+      "patrones": ["chart.js", "chartjs", "Chart.min.js", "new Chart(", "ctx.chart"],
+      "headers": {"X-ChartJS-Version": ".*"}
+    },
+    {
+      "nombre": "D3.js",
+      "categoria": "JavaScript Charts",
+      "patrones": ["d3.js", "d3js", "d3.v", "d3.min.js", "d3.scale", "d3.svg"],
+      "headers": {"X-D3-Version": ".*"}
+    },
+    {
+      "nombre": "Highcharts",
+      "categoria": "JavaScript Charts",
+      "patrones": ["highcharts", "highcharts.js", "Highcharts.Chart", "highstock", "highmaps"],
+      "headers": {"X-Highcharts-Version": ".*"}
+    },
+    {
+      "nombre": "Leaflet",
+      "categoria": "JavaScript Maps",
+      "patrones": ["leaflet", "leaflet.js", "leaflet.min.css", "L.map", "leaflet-map"],
+      "headers": {"X-Leaflet-Version": ".*"}
+    },
+    {
+      "nombre": "Google Maps API",
+      "categoria": "JavaScript Maps",
+      "patrones": ["maps.googleapis.com", "google.maps", "googlemaps", "initMap", "google-map"],
+      "headers": {"X-Google-Maps-API": ".*"}
+    },
+    {
+      "nombre": "OpenStreetMap",
+      "categoria": "JavaScript Maps",
+      "patrones": ["openstreetmap", "openstreetmap.org", "osm", "leaflet", "tile.openstreetmap"],
+      "headers": {"X-OSM-Version": ".*"}
+    },
+    {
+      "nombre": "Socket.io",
+      "categoria": "Real-time",
+      "patrones": ["socket.io", "socketio", "io.connect", "io\\(", "websocket", "engine.io"],
+      "headers": {"X-SocketIO-Version": ".*"},
+      "cookies": ["io"]
+    },
+    {
+      "nombre": "WebRTC",
+      "categoria": "Real-time",
+      "patrones": ["webrtc", "RTCPeerConnection", "getUserMedia", "peerconnection", "datachannel"],
+      "headers": {"X-WebRTC-Version": ".*"}
     }
   ]
 }
